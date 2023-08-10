@@ -9,7 +9,7 @@ import NavBar from './components/NavBar';
 function App() {
   return (
     <BrowserRouter>
-      <div className="App">
+      <div className="bg-[#d8ccb6] min-h-screen">
         <NavBar />
         <Routes>
           <Route path='/' exact element={<Home />} />
