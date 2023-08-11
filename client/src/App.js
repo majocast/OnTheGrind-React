@@ -6,6 +6,7 @@ import FAQ from './pages/FAQ';
 import About from './pages/About';
 import NavBar from './components/NavBar';
 import Login from './pages/Login';
+import Register from './pages/Register';
 import Cart from './pages/Cart';
 
 function LogLocation( { onLocationChange }) {
@@ -23,6 +24,7 @@ const routes = [
   { path: '/faq', component: FAQ },
   { path: '/about', component: About },
   { path: '/login', component: Login },
+  { path: '/register', component: Register },
   { path: '/cart', component: Cart },
 ]
 
@@ -33,7 +35,7 @@ function App() {
   const handleLocationChange = (newLocation) => {
     console.log(newLocation);
     console.log(newLocation.pathname);
-    if(newLocation.pathname !== '/login' && newLocation.pathname !== '/cart') { 
+    if(newLocation.pathname !== '/login' && newLocation.pathname !== '/cart' && newLocation.pathname !== '/register') { 
       setNavBar(true);
     } else {
       setNavBar(false);
