@@ -17,6 +17,15 @@ function LogLocation( { onLocationChange }) {
   return null;
 }
 
+const routes = [
+  { path: '/', component: Home},
+  { path: '/products', component: Products },
+  { path: '/faq', component: FAQ },
+  { path: '/about', component: About },
+  { path: '/login', component: Login },
+  { path: '/cart', component: Cart },
+]
+
 function App() {
 
   const [navBar, setNavBar] = useState(true);
@@ -37,12 +46,9 @@ function App() {
         {navBar ? <NavBar /> : null}
         <LogLocation onLocationChange={handleLocationChange}/>
         <Routes>
-          <Route path='/' exact element={<Home />} />
-          <Route path='/products' element={<Products />} />
-          <Route path='/faq' element={<FAQ />} />
-          <Route path='/about' element={<About />} />
-          <Route path='/login' element={<Login />} />
-          <Route path='/cart' element={<Cart />} />
+          {routes.map((route, index) => {
+            return (<Route key={route.path} path={route.path} element={<route.component />} />)
+          })}
         </Routes>
       </div>
     </BrowserRouter>

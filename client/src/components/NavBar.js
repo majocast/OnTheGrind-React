@@ -7,7 +7,7 @@ import ProfLogo from '../images/profile.png';
 const NavBar = () => {
   return (
     <nav className='flex list-none w-100 bg-[#47220f] align-center justify-between text-white font-bold py-2 px-4'>
-      <ul className='flex space-x-10 items-center justify-center'>
+      <ul className='flex space-x-10 items-center justify-center uppercase'>
         <li><img src={Logo} alt='logo' className='w-60'/></li>
         <li><Link to='/'>Home</Link></li>
         <li><Link to='/products'>Products</Link></li>
