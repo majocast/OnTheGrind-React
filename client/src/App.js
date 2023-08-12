@@ -8,6 +8,7 @@ import NavBar from './components/NavBar';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Cart from './pages/Cart';
+import Account from './pages/Account';
 
 function LogLocation( { onLocationChange }) {
   const location = useLocation("");
@@ -26,6 +27,7 @@ const routes = [
   { path: '/login', component: Login },
   { path: '/register', component: Register },
   { path: '/cart', component: Cart },
+  { path: '/account', component: Account }
 ]
 
 function App() {
