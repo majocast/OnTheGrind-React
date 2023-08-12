@@ -1,8 +1,9 @@
 import React, {useState, useEffect} from "react";
 import axios from "axios";
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 function Account() {
+  const history = useNavigate();
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -22,6 +23,11 @@ function Account() {
   }
   pullInfo();
 
+  function signOut() {
+    localStorage.clear();
+    history('/');
+  }
+
   if(!password || !email || !username) {
     return (
       <div>
@@ -36,7 +42,7 @@ function Account() {
         <div className='rounded-2xl border-4 border-[#47220f] flex flex-col items-center justify-center bg-white p-8 my-4 drop-shadow-lg gap-4'>
           <h1 className='text-3xl font-bold py-2'>{username}</h1>
           <h2>email: {email}</h2>
-          <Link className='w-full text-center h-auto rounded-lg py-1 mt-1 cursor-pointer bg-[#47220f] text-white hover:bg-[#d8ccb6] hover:text-[#47220f]' to='/register'>Log Out</Link>
+          <Link className='w-full text-center h-auto rounded-lg py-1 mt-1 cursor-pointer bg-[#47220f] text-white hover:bg-[#d8ccb6] hover:text-[#47220f]' onClick={signOut} to='/'>Log Out</Link>
         </div>
       </div>
     </div>

@@ -1,18 +1,19 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useLocation, useNavigate } from'react-router-dom';
+import { Link } from'react-router-dom';
 import Logo from '../images/logo.png';
 import { CgProfile } from 'react-icons/cg';
 import { AiOutlineShoppingCart } from'react-icons/ai';
 
 const NavBar = () => {
-  const location = useLocation();
   const [username, setUser] = useState(false);
 
   useEffect(() => {
     if(localStorage.getItem('username')) {
       setUser(true);
+    } else {
+      setUser(false);
     }
-  }, [location.state]);
+  }, [localStorage.getItem('username')]);
 
   return (
     <nav className='flex list-none w-100 bg-[#47220f] align-center justify-between text-white font-bold py-2 px-4'>
