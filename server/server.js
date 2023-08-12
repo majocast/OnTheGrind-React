@@ -53,7 +53,8 @@ app.post('/register', async(req, res) => {
   try {
     //searches the user in the database
     const check = await collection.findOne({email: email});
-    if(check) {
+    const checkUser = await collection.findOne({username: username});
+    if(check || checkUser) {
       res.json("exists");
     }
     else {

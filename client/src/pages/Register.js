@@ -21,7 +21,7 @@ function Register(){
         })
         .then((res) => {
           if(res.data === 'exists') {
-            alert('user has already registered');
+            alert('username or email has already registered');
             history('/login');
           }
           else if(res.data === 'does not exist') {

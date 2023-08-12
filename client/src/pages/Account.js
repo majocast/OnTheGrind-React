@@ -24,6 +24,14 @@ function Account() {
   console.log(username);
   console.log(email);
   console.log(password);
+
+  if(!password || !email || !username) {
+    return (
+      <div>
+        <h1>Loading...</h1>
+      </div>
+    )
+  }
   
   return (
     <div>
