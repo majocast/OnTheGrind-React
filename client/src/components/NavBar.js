@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from'react-router-dom';
 import Logo from '../images/logo.png';
 import { CgProfile } from 'react-icons/cg';
-import { AiOutlineShoppingCart } from'react-icons/ai';
+import { AiOutlineShoppingCart } from 'react-icons/ai';
 
 const NavBar = () => {
   const [username, setUser] = useState(false);
