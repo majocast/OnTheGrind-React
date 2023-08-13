@@ -38,7 +38,7 @@ const Products = () => {
         <button class="rounded-md p-2 bg-white" onClick={() => handleFilterSelection('other')}>Other</button>
       </div>
       <div className='grid grid-cols-4 gap-10 pb-8 w-5/6'>
-        {products.map((product, index) => {
+        {products.map((product) => {
           if(product.class.includes(filter)) {
             return (
               <div

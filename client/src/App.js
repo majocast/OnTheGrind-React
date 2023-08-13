@@ -46,14 +46,18 @@ function App() {
 
   return (
     <BrowserRouter>
-      <div className="bg-[#d8ccb6] min-h-screen">
-        {navBar ? <NavBar /> : null}
-        <LogLocation onLocationChange={handleLocationChange}/>
-        <Routes>
-          {routes.map((route, index) => {
-            return (<Route key={route.path} path={route.path} element={<route.component />} />)
-          })}
-        </Routes>
+      <div className="flex flex-col bg-[#d8ccb6] min-h-screen">
+        <div className='flex flex-shrink-0'>
+          {navBar ? <NavBar/> : null}
+        </div>
+        <div className='flex-grow pt-20'>
+          <LogLocation onLocationChange={handleLocationChange}/>
+          <Routes>
+            {routes.map((route, index) => {
+              return (<Route key={route.path} path={route.path} element={<route.component />} />)
+            })}
+          </Routes>
+        </div>
       </div>
     </BrowserRouter>
   );
