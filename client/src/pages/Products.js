@@ -89,6 +89,7 @@ const Products = () => {
               </div>
             ) 
           }
+          return null;
         })}
       </div>
       <Modal isOpen={isModalOpen} onClose={closeModal} selectedProduct={selectedProduct}/>

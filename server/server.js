@@ -128,7 +128,21 @@ app.get('/pullcart/:username', async(req, res) => {
   }
 })
 
+//remove items from cart collection
 
+app.delete('/removeitem/:value', async(req, res) => {
+  const itemId = req.params.value;
+  try {
+    const deletedItem = await cart.findByIdAndDelete(itemId);
+    if(!deletedItem) {
+      res.json('item not found');
+    } else {
+      res.json('item deleted');
+    }
+  } catch (error) {
+    res.json('error when deleting item: ' + error);
+  }
+})
 
 let PORT = process.env.PORT || 3500;
 
