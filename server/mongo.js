@@ -24,7 +24,27 @@ const newSchema = new mongoose.Schema({
   }
 })
 
+const cartSchema = new mongoose.Schema({
+  username: {
+    type: String,
+    required: true,
+  },
+  item: {
+    type: String,
+    required: true
+  },
+  price: {
+    type: Number,
+    required: true
+  },
+  weight: {
+    type: String,
+    required: true
+  }
+})
+
 const collection = mongoose.model('users', newSchema);
+const cart = mongoose.model('cart', cartSchema);
 
 //code below is necessary to access the database from any file.
-module.exports = collection;
+module.exports = { collection, cart };

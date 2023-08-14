@@ -91,6 +91,26 @@ app.get('/account/:username', async(req, res) => {
   }
 })
 
+//add item to cart collection
+app.post('/addcart', async(req, res) => {
+  //axios passes email and password from login page
+  //server.js gets the email and pass from the req.body
+  const {value, item, user, price} = req.body;
+  const data = {
+    username: user,
+    item: item,
+    price: price,
+    weight: value,
+  }
+
+  try {
+      console.log(data);
+      await collection.insertMany([data]);
+  } catch (error) {
+      res.json("could not complete add item");
+  }
+})
+
 let PORT = process.env.PORT || 3500;
 
 app.listen(PORT, () => {
