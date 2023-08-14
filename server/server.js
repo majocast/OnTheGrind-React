@@ -115,26 +115,16 @@ app.post('/addcart', async(req, res) => {
 })
 
 //pull items from cart collection
-app.get('/pullcart', async(req, res) => {
+app.get('/pullcart/:username', async(req, res) => {
   const username = req.params.username;
   console.log(username);
-  
-  const {cartValue, cartItem, user, price} = req.body;
-  const data = {
-    username: user,
-    item: cartItem,
-    price: price,
-    weight: cartValue,
-  }
-  console.log(data);
 
   try {
-      console.log(data);
-      await cart.insertMany([data]);
-      res.json('item successfully added to cart!');
+    const items = await cart.find({username: username});
+    res.json([items]);
   } catch (error) {
-      console.log(error)
-      res.json("could not complete add item");
+    console.log(error);
+    res.json("items not pulled");
   }
 })
 

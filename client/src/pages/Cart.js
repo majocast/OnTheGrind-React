@@ -3,13 +3,14 @@ import axios from 'axios';
 import { Link } from'react-router-dom';
 
 const Cart = () => {
-  const [cart, setCart] = useState([]);
+  const [cart, setCart] = useState();
 
   async function pullCart() {
     try {
       const username = localStorage.getItem('username');
       const response = await axios.get(`http://localhost:3500/pullcart/${username}`);
-      console.log(response.json());
+      setCart(response.data);
+      console.log(response.data[0]);
     } catch (error) {
       alert('Error retrieving Cart information: ' + error.message);
     }
@@ -17,7 +18,7 @@ const Cart = () => {
   
   useEffect(() => {
     pullCart();
-  })
+  }, [])
 
   return (
     <div>
