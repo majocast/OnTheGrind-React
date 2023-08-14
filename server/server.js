@@ -1,5 +1,5 @@
 const express = require('express');
-const collection = require('./mongo');
+const { collection, cart } = require('./mongo');
 const cors = require('cors');
 const app = express();
 
@@ -95,21 +95,50 @@ app.get('/account/:username', async(req, res) => {
 app.post('/addcart', async(req, res) => {
   //axios passes email and password from login page
   //server.js gets the email and pass from the req.body
-  const {value, item, user, price} = req.body;
+  const {cartValue, cartItem, user, price} = req.body;
   const data = {
     username: user,
-    item: item,
+    item: cartItem,
     price: price,
-    weight: value,
+    weight: cartValue,
   }
+  console.log(data);
 
   try {
       console.log(data);
-      await collection.insertMany([data]);
+      await cart.insertMany([data]);
+      res.json('item successfully added to cart!');
   } catch (error) {
+      console.log(error)
       res.json("could not complete add item");
   }
 })
+
+//pull items from cart collection
+app.get('/pullcart', async(req, res) => {
+  const username = req.params.username;
+  console.log(username);
+  
+  const {cartValue, cartItem, user, price} = req.body;
+  const data = {
+    username: user,
+    item: cartItem,
+    price: price,
+    weight: cartValue,
+  }
+  console.log(data);
+
+  try {
+      console.log(data);
+      await cart.insertMany([data]);
+      res.json('item successfully added to cart!');
+  } catch (error) {
+      console.log(error)
+      res.json("could not complete add item");
+  }
+})
+
+
 
 let PORT = process.env.PORT || 3500;
 

@@ -1,9 +1,22 @@
 import React, {useState, useEffect} from 'react';
+import axios from 'axios';
 import { Link } from'react-router-dom';
 
 const Cart = () => {
+  const [cart, setCart] = useState([]);
+
+  async function pullCart() {
+    try {
+      const username = localStorage.getItem('username');
+      const response = await axios.get(`http://localhost:3500/pullcart/${username}`);
+      console.log(response.json());
+    } catch (error) {
+      alert('Error retrieving Cart information: ' + error.message);
+    }
+  }
+  
   useEffect(() => {
-    console.log('Cart useEffect');
+    pullCart();
   })
 
   return (
