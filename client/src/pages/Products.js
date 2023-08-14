@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Modal from '../components/Modal';
 import arabicaImage from '../images/products/arabica.jpg';
 import bourbonImage from '../images/products/bourbon.jpg';
@@ -34,6 +34,7 @@ const Products = () => {
   const [filter, setFilter] = useState('all');
   const [selectedProduct, setSelectedProduct] = useState(null);
 
+
   const handleFilterSelection = (newFilter) => {
     console.log('new filter: ' + newFilter);
     setFilter(newFilter);
@@ -55,10 +56,9 @@ const Products = () => {
       <h1 className='uppercase text-5xl font-bold py-4'>Products</h1>
       <h2 className='uppercase text-md font-bold pb-4'>**all products are sold by the bag**</h2>
       <div className='space-x-4 pb-6' align="center">
-        <button class="rounded-md p-2 bg-white" onClick={() => handleFilterSelection('all')}>Show All</button>
-        <button class="rounded-md p-2 bg-white" onClick={() => handleFilterSelection('coffee')}>Coffee</button>
-        <button class="rounded-md p-2 bg-white" onClick={() => handleFilterSelection('tea')}>Tea</button>
-        <button class="rounded-md p-2 bg-white" onClick={() => handleFilterSelection('other')}>Other</button>
+        <button class="ease-in-out duration-200 rounded-md p-2 bg-white" onClick={() => handleFilterSelection('all')}>Show All</button>
+        <button class="ease-in-out duration-200 rounded-md p-2 bg-white" onClick={() => handleFilterSelection('coffee')}>Coffee</button>
+        <button class="ease-in-out duration-200 rounded-md p-2 bg-white" onClick={() => handleFilterSelection('tea')}>Tea</button>
       </div>
       <div className='grid grid-cols-4 gap-10 pb-8 w-5/6'>
         {products.map((product) => {

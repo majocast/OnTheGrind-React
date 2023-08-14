@@ -60,7 +60,7 @@ const Modal = ({ isOpen, onClose, selectedProduct }) => {
   if (!isOpen) return null;
 
   return (
-    <div className="flex fixed top-0 left-0 w-screen h-screen justify-center items-center bg-gray-950/50">
+    <div className="z-20 flex fixed top-0 left-0 w-screen h-screen justify-center items-center bg-gray-950/50">
       <div className="animate-rise relative h-3/4 w-1/2 top-50 left-50 flex flex-col items-center justify-center bg-white rounded-2xl">
         <div className='w-5/6 flex flex-col justify-center items-center'>
           <h1 className='uppercase text-5xl font-bold py-4'>{selectedProduct.name}</h1>
