@@ -78,7 +78,7 @@ const orderSchema = new mongoose.Schema({
 
 const collection = mongoose.model('users', newSchema);
 const cart = mongoose.model('cart', cartSchema);
-const order = mongoose.model('order', orderSchema);
+const Order = mongoose.model('order', orderSchema);
 
 //code below is necessary to access the database from any file.
-module.exports = { collection, cart, order };
+module.exports = { collection, cart, Order };

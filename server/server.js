@@ -145,14 +145,17 @@ app.delete('/removeitem/:value', async(req, res) => {
 })
 
 //adding order to order collection
-app.post('/submitOrder', async (req, res) => {
+app.post('/submitorder/:username', async (req, res) => {
   try {
+    const username = req.params.username;
     const orderData = req.body;
     const order = new Order(orderData);
     await order.save();
+    const removeAll = await cart.deleteMany({ 'username': username })
+    console.log(removeAll.deletedCount);
     res.json({ message: 'Order submitted successfully' });
   } catch (error) {
-    console.log('error when saving order');
+    console.log('error when saving order or deleting documents: ' + error);
     res.status(500).json({ error: 'Error submitting order' });
   }
 });

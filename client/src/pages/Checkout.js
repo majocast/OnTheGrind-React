@@ -22,7 +22,16 @@ function Checkout() {
       'nameOnCard',
       'expiration',
       'zipCode',
-      'cvv'
+      'cvv',
+      'shipping',
+      'scheduled',
+      'shipName',
+      'shipStreet',
+      'shipCity',
+      'shipState',
+      'shipCountry',
+      'shipZip',
+      'email',
     ];
 
     const allFieldsFilled = requiredFields.every(fieldName => {
@@ -71,7 +80,7 @@ function Checkout() {
   }, []);
 
   const submitOrder = (event) => {
-    event.preventDefault(event); // Prevent form submission and page refresh
+    event.preventDefault(); // Prevent form submission and page refresh
 
     if (!formValid) {
       alert('Please fill out all required fields.');
@@ -92,7 +101,7 @@ function Checkout() {
     };
   
     const shippingOption = document.querySelector('input[name="shipping"]:checked').value;
-    const scheduledDate = document.querySelector('input[name="scheduledDate"]').value;
+    const scheduledDate = document.querySelector('input[name="scheduled"]').value;
   
     const shippingInfo = {
       shipName: document.querySelector('input[name="shipName"]').value,
@@ -106,7 +115,8 @@ function Checkout() {
 
     // Do something with the form data, like sending it to a server
     // Example using Axios:
-    axios.post('http://localhost:3500/submit-order', {
+    const username = localStorage.getItem('username');
+    axios.post(`http://localhost:3500/submitorder/${username}`, {
       billing,
       shipping: {
         option: shippingOption,
@@ -116,11 +126,12 @@ function Checkout() {
       cart: cart,
     })
     .then(response => {
-      console.log('Order submitted successfully:', response.data);
+      alert('Order submitted successfully:', response.data);
+      history('/');
       // Perform further actions or show success message to the user
     })
     .catch(error => {
-      console.error('Error submitting order:', error);
+      alert('Error submitting order:', error);
       // Handle errors or show error message to the user
     });
   };
