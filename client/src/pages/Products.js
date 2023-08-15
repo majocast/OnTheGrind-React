@@ -52,7 +52,7 @@ const Products = () => {
   }
 
   return (
-    <div className='flex flex-col items-center justify-center'>
+    <div className='animate-rise flex flex-col items-center justify-center'>
       <h1 className='uppercase text-5xl font-bold py-4'>Products</h1>
       <h2 className='uppercase text-md font-bold pb-4'>**all products are sold by the bag**</h2>
       <div className='space-x-4 pb-6' align="center">
@@ -60,7 +60,7 @@ const Products = () => {
         <button class="ease-in-out duration-200 rounded-md p-2 bg-white" onClick={() => handleFilterSelection('coffee')}>Coffee</button>
         <button class="ease-in-out duration-200 rounded-md p-2 bg-white" onClick={() => handleFilterSelection('tea')}>Tea</button>
       </div>
-      <div className='grid grid-cols-4 gap-10 pb-8 w-5/6'>
+      <div className='grid grid-cols-1 xs:grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 pb-8 w-5/6'>
         {products.map((product) => {
           if(product.class.includes(filter)) {
             return (

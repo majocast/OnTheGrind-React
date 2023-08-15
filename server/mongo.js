@@ -43,8 +43,42 @@ const cartSchema = new mongoose.Schema({
   }
 })
 
+const orderSchema = new mongoose.Schema({
+  cart: [{
+    item: String,
+    weight: String,
+    price: Number
+  }],
+  billing: {
+    name: String,
+    street: String,
+    city: String,
+    state: String,
+    country: String,
+    cardNumber: String,
+    nameOnCard: String,
+    expiration: String,
+    zipCode: String,
+    cvv: String
+  },
+  shipping: {
+    option: String,
+    scheduledDate: Date
+  },
+  shippingInfo: {
+    shipName: String,
+    shipStreet: String,
+    shipCity: String,
+    shipState: String,
+    shipCountry: String,
+    shipZip: Number,
+    email: String
+  }
+});
+
 const collection = mongoose.model('users', newSchema);
 const cart = mongoose.model('cart', cartSchema);
+const order = mongoose.model('order', orderSchema);
 
 //code below is necessary to access the database from any file.
-module.exports = { collection, cart };
+module.exports = { collection, cart, order };

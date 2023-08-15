@@ -13,9 +13,9 @@ const About = () => {
   ];
 
   return (
-    <div className='flex flex-col items-center justify-center w-screen py-10'>
-      <h1 className='uppercase text-5xl font-bold py-8'>The Team Behind The Grind</h1>
-      <div className='grid grid-cols-4 gap-12 pb-8 w-3/4 my-10'>
+    <div className='animate-rise flex flex-col items-center justify-center w-screen py-10'>
+      <h1 className='uppercase text-5xl font-bold py-8 text-center'>The Team Behind The Grind</h1>
+      <div className='grid grid-cols-1 xs:grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 pb-8 w-3/4 my-10'>
         {team.map((member) => {
           return (
             <div className='flex flex-col justify-center items-center'>

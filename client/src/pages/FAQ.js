@@ -2,7 +2,7 @@ import React from 'react';
 
 const FAQ = () => {
   return (
-    <div className='flex flex-col items-center'>
+    <div className='animate-rise flex flex-col justify-center items-center text-center'>
       <h1 className='uppercase text-5xl font-bold py-8'>Frequently Asked Questions</h1>
       <div className='flex flex-col w-4/5 gap-6'>
         <div className="block rounded-lg bg-white p-6 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700">

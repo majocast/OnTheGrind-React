@@ -5,7 +5,7 @@ module.exports = {
     extend: {
       keyframes: {
         rise: {
-          '0%': {transform: 'translateY(100%)', opacity: 0},
+          '0%': {transform: 'translateY(50px)', opacity: 0},
           '100%': {transform: 'translateY(0)', opacity: 1}
         },
       },

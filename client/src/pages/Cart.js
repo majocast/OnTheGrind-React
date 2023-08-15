@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import { Link } from'react-router-dom';
+import { BsTrash } from 'react-icons/bs'
 import emptyCart from '../images/empty-cart.png';
 import arabicaImage from '../images/products/arabica.jpg';
 import bourbonImage from '../images/products/bourbon.jpg';
@@ -60,19 +61,21 @@ const Cart = () => {
     return <div>Loading cart...</div>
   } else if (cart.length === 0) {
     return (
-      <div className='flex flex-col justify-center items-center'>
-        <img src={emptyCart} alt='cart empty' />
-        <h1 className='uppercase text-2xl font-bold py-4'>your cart is currently empty!</h1>
-        <Link className='ease-in-out duration-200 rounded-lg flex justify-center align-center p-1 cursor-pointer bg-[#47220f] text-white border-2 border-[#47220f] hover:bg-[#d8ccb6] hover:text-[#47220f]' to="/products">View Our Products!</Link>
+      <div>
         <Link className='ease-in-out duration-200 rounded-lg flex justify-center align-center absolute top-2 left-2 p-1 cursor-pointer bg-[#47220f] text-white border-2 border-[#47220f] hover:bg-[#d8ccb6] hover:text-[#47220f]' to="/">Back to Home</Link>
+        <div className='animate-rise flex flex-col justify-center items-center'>
+          <img src={emptyCart} alt='cart empty' />
+          <h1 className='uppercase text-2xl font-bold py-4'>your cart is currently empty!</h1>
+          <Link className='ease-in-out duration-200 rounded-lg flex justify-center align-center p-1 cursor-pointer bg-[#47220f] text-white border-2 border-[#47220f] hover:bg-[#d8ccb6] hover:text-[#47220f]' to="/products">View Our Products!</Link>
+        </div>
       </div>
     )
   }
 
   return (
-    <div className='flex flex-col justify-center items-center'>
+    <div className='animate-rise flex flex-col justify-center items-center'>
       <h1 className='uppercase text-5xl font-bold py-4'>Your Cart</h1>
-      <Link className='rounded-lg flex justify-center align-center absolute top-2 left-2 p-1 cursor-pointer bg-[#47220f] text-white border-2 border-[#47220f] hover:bg-[#d8ccb6] hover:text-[#47220f]' to="/">Back to Home</Link>
+      <Link className='ease-in-out duration-200 rounded-lg flex justify-center align-center absolute top-2 left-2 p-1 cursor-pointer bg-[#47220f] text-white border-2 border-[#47220f] hover:bg-[#d8ccb6] hover:text-[#47220f]' to="/">Back to Home</Link>
       <div className='flex w-3/4 gap-10 justify-center items-center'>
         <div className='rounded-xl grid grid-rows-auto py-1 w-3/4 bg-[#47220f] shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)]'>
           <div className='grid grid-cols-4 p-4 mx-2'>
@@ -95,6 +98,7 @@ const Cart = () => {
           <h1 className='uppercase text-4xl font-bold py-4'>Total</h1>
           <h2 className='uppercase text-xl font-bold py-4'>Total Items: {cart.length}</h2>
           <h2 className='uppercase text-xl font-bold py-4'>Total Price: ${total}</h2>
+          <Link className='ease-in-out duration-200 text-center h-auto rounded-lg p-1 mt-1 cursor-pointer bg-[#47220f] border-2 border-[#47220f] text-white hover:bg-[#d8ccb6] hover:text-[#47220f]' to='/checkout'>Proceed to Checkout</Link>
         </div>
       </div>
     </div>

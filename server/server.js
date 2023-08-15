@@ -1,5 +1,5 @@
 const express = require('express');
-const { collection, cart } = require('./mongo');
+const { collection, cart, Order } = require('./mongo');
 const cors = require('cors');
 const app = express();
 
@@ -143,6 +143,19 @@ app.delete('/removeitem/:value', async(req, res) => {
     res.json('error when deleting item: ' + error);
   }
 })
+
+//adding order to order collection
+app.post('/submitOrder', async (req, res) => {
+  try {
+    const orderData = req.body;
+    const order = new Order(orderData);
+    await order.save();
+    res.json({ message: 'Order submitted successfully' });
+  } catch (error) {
+    console.log('error when saving order');
+    res.status(500).json({ error: 'Error submitting order' });
+  }
+});
 
 let PORT = process.env.PORT || 3500;
 

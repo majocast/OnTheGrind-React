@@ -4,7 +4,7 @@ import coffeevid from '../images/coffeevid.mp4';
 function Home() {
 
   return (
-    <div className='flex flex-col items-center justify-center w-full h-full'>
+    <div className='anime-rise flex flex-col items-center justify-center w-full h-full'>
       <section className='flex justify-center w-full bg-black'>
         <video autoPlay loop muted>
           <source src={coffeevid} type="video/mp4" />

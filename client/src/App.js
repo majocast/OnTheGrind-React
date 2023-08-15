@@ -9,6 +9,7 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import Cart from './pages/Cart';
 import Account from './pages/Account';
+import Checkout from './pages/Checkout';
 
 function LogLocation( { onLocationChange }) {
   const location = useLocation("");
@@ -27,7 +28,8 @@ const routes = [
   { path: '/login', component: Login },
   { path: '/register', component: Register },
   { path: '/cart', component: Cart },
-  { path: '/account', component: Account }
+  { path: '/account', component: Account },
+  { path: '/checkout', component: Checkout },
 ]
 
 function App() {
@@ -37,7 +39,7 @@ function App() {
   const handleLocationChange = (newLocation) => {
     console.log(newLocation);
     console.log(newLocation.pathname);
-    if(newLocation.pathname !== '/login' && newLocation.pathname !== '/cart' && newLocation.pathname !== '/register') { 
+    if(newLocation.pathname !== '/login' && newLocation.pathname !== '/cart' && newLocation.pathname !== '/register' && newLocation.pathname !== '/checkout' ) { 
       setNavBar(true);
     } else {
       setNavBar(false);
