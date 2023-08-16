@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from'react-router-dom';
+import { Link, useLocation } from'react-router-dom';
 import Logo from '../images/logo.png';
 import { CgProfile } from 'react-icons/cg';
 import { AiOutlineShoppingCart } from 'react-icons/ai';
 
 const NavBar = () => {
+  const location = useLocation();
   const [username, setUser] = useState(false);
 
   useEffect(() => {
@@ -13,7 +14,7 @@ const NavBar = () => {
     } else {
       setUser(false);
     }
-  }, [localStorage.getItem('username')]);
+  }, [location.pathname]);
 
   return (
     <div className='fixed top-0 left-0 w-screen z-10'>

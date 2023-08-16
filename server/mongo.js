@@ -21,7 +21,7 @@ const newSchema = new mongoose.Schema({
   username: {
     type: String,
     required: true
-  }
+  },
 })
 
 const cartSchema = new mongoose.Schema({
