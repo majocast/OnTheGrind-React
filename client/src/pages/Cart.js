@@ -1,7 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import { Link } from'react-router-dom';
-import { BsTrash } from 'react-icons/bs'
 import emptyCart from '../images/empty-cart.png';
 import arabicaImage from '../images/products/arabica.jpg';
 import bourbonImage from '../images/products/bourbon.jpg';
@@ -84,11 +83,53 @@ const Cart = () => {
             <h1 className='text-white'>Price Per Bag (USD)</h1>
           </div>
           {cart.map((product, index) => {
+            var productImg;
+            switch(product.item) {
+              case 'arabica':
+                productImg = arabicaImage;
+                break;
+              case 'bourbon':
+                productImg = bourbonImage;
+                break;
+              case 'excelsa':
+                productImg = excelsaImage;
+                break;
+              case 'french':
+                productImg = frenchImage;
+                break;
+              case 'geisha':
+                productImg = geishaImage;
+                break;
+              case 'liberica':
+                productImg = libericaImage;
+                break;
+              case 'robusta':
+                productImg = robustaImage;
+                break;
+              case 'typica':
+                productImg = typicaImage;
+                break;
+              case 'green':
+                productImg = greenImage;
+                break;
+              case 'herbal':
+                productImg = herbalImage;
+                break;
+              case 'white':
+                productImg = whiteImage;
+                break;
+              case 'rose':
+                productImg = roseImage;
+                break;
+              default:
+                productImg = '';
+            }
             return (
-              <div className='rounded-md bg-[#d8ccb6] grid grid-cols-4 p-4 mx-2 my-1'>
-                <h1 className='capitalize'>{product.item}</h1>
-                <h1>{product.weight}</h1>
-                <h1>{product.price}</h1>
+              <div className='rounded-md bg-[#d8ccb6] grid grid-cols-5 p-4 mx-2 my-1 gap-4 align-center justify-center'>
+                <img className='w-20' src={productImg} alt='product' />
+                <h1 className='flex flex-col capitalize justify-center'>{product.item}</h1>
+                <h1 className='flex flex-col justify-center'>{product.weight}</h1>
+                <h1 className='flex flex-col justify-center'>{product.price}</h1>
                 <button value={product._id} onClick={(e) => removeItem(e)}>remove</button>
               </div>
             )

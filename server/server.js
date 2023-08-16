@@ -161,14 +161,25 @@ app.post('/submitorder/:username', async (req, res) => {
   }
 });
 
+//updating username and cart information
 app.put('/editusername/:username', async (req, res) => {
   const userToEdit = req.params.username;
   const updatedData = req.body.newUsername;
   try {
     if(updatedData !== '') {
       const userToUpdate = await collection.findOne({username: userToEdit});
+      const cartToUpdate = await cart.find({username: userToEdit});
       const updateExists = await collection.findOne({username: updatedData});
       if(!updateExists) {
+        if(cartToUpdate) {
+          await cart.updateMany (
+            { username: userToEdit },
+            { $set: { username: updatedData }}
+          );
+          console.log(`successfully updated carts with ${userToEdit} to ${updatedData}`);
+        } else {
+          console.log('no matching records found in cart with username: ' + userToEdit)
+        }
         userToUpdate.username = updatedData;
         await userToUpdate.save();
         res.json('username updated successfully');
