@@ -6,7 +6,7 @@ import NicoleImg from '../images/nicole-photo.jpg'
 import MarcImg from '../images/alt-marc-photo.jpg'
 import MarcImg2 from '../images/marc-photo.jpg'
 
-const About = () => {
+function About() {
   const location = useLocation();
   const [reworkShow, setReworkShow] = useState(true);
 
@@ -28,8 +28,8 @@ const About = () => {
 
   return (
     <div className='animate-rise flex flex-col items-center justify-center w-full py-10'>
-      <h1 className='uppercase text-5xl font-bold py-8 text-center'>The Team Behind The Grind</h1>
-      <div className='grid grid-cols-1 xs:grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 pb-8 w-3/4 '>
+      <h1 className='uppercase text-3xl sm:text-3xl md:text-5xl lg:text-5xl font-bold py-8 text-center'>The Team Behind The Grind</h1>
+      <div className='grid grid-cols-1 xs:grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-20 sm:gap-20 md:gap-12 lg:gap-12 pb-8 w-3/4 md:w-5/6'>
         {team.map((member, index) => {
           return (
             <div key={index} className='flex flex-col justify-center items-center'>
@@ -49,7 +49,7 @@ const About = () => {
       </div>
       {reworkShow ? 
       <section className='flex flex-col justify-center items-center bg-white p-6'>
-        <h1 className='uppercase text-5xl font-bold py-4 text-center'>The Man Behind The Rebuild</h1>
+        <h1 className='uppercase text-3xl sm:text-3xl md:text-5xl lg:text-5xl font-bold py-4 text-center'>The Man Behind The Rebuild</h1>
         <div className="p-6 sm:p-12 dark:bg-gray-900 dark:text-gray-100 bg-[#d8ccb6] border-4 border-[#47220f] rounded-2xl w-5/6">
           <div className="flex flex-col space-y-4 md:space-y-0 md:space-x-6 md:flex-row">
             <img src={MarcImg2} alt="" className="self-center flex-shrink-0 w-24 h-24 border-2 border-[#47220f] rounded-full md:justify-self-start dark:bg-gray-500 dark:border-gray-700" />

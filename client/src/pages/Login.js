@@ -3,7 +3,7 @@ import axios from 'axios';
 import { Link, useNavigate } from'react-router-dom';
 import Logo from '../images/logo.png';
 
-function Login (){
+function Login() {
   const history = useNavigate()
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');

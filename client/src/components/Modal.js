@@ -14,8 +14,6 @@ const Modal = ({ isOpen, onClose, selectedProduct }) => {
   }, [])
 
   const getSelectedValue = (value, selectedItem) => {
-    console.log(value);
-    console.log(selectedItem);
     setCartValue(value);
     setCartItem(selectedItem);
   }

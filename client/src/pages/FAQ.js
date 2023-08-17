@@ -1,9 +1,9 @@
 import React from 'react';
 
-const FAQ = () => {
+function FAQ() {
   return (
     <div className='animate-rise flex flex-col justify-center items-center text-center'>
-      <h1 className='uppercase text-5xl font-bold py-8'>Frequently Asked Questions</h1>
+      <h1 className='uppercase text-3xl sm:text-3xl md:text-5xl lg:text-5xl font-bold py-8'>Frequently Asked Questions</h1>
       <div className='flex flex-col w-4/5 gap-6'>
         <div className="block rounded-lg bg-white p-6 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700">
           <h5 className="mb-2 text-xl font-medium leading-tight text-neutral-800 dark:text-neutral-50">

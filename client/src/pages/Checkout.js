@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Logo from '../images/logo.png';
-import Cart from './Cart';
 import { Link, useNavigate } from 'react-router-dom';
 
 function Checkout() {
@@ -63,7 +62,6 @@ function Checkout() {
   async function removeItem(e) {
     let value = e.target.value;
     try {
-      console.log(value);
       const response = await axios.delete(`http://localhost:3500/removeitem/${value}`);
       if(response.data.status === 'item not found') {
         alert('error: item not found');
@@ -80,8 +78,7 @@ function Checkout() {
   }, []);
 
   const submitOrder = (event) => {
-    event.preventDefault(); // Prevent form submission and page refresh
-
+    event.preventDefault();
     if (!formValid) {
       alert('Please fill out all required fields.');
       return;
@@ -151,11 +148,11 @@ function Checkout() {
 
   return (
     <div className='animate-rise duration-200 flex flex-col items-center'>
-      <img src={Logo} alt='logo' className='absolute top-0 w-80'/>
+      <img src={Logo} alt='logo' className='md:absolute lg:absolute top-0 w-80'/>
       <Link className='ease-in-out duration-200 rounded-lg flex justify-center align-center absolute top-2 left-2 p-1 cursor-pointer bg-[#47220f] text-white border-2 border-[#47220f] hover:bg-[#d8ccb6] hover:text-[#47220f]' to="/">Back to Home</Link>
-      <h1 className='uppercase text-5xl font-bold py-4 align-center'>Place Your Order</h1>
-      <form className='grid grid-cols-2 grid-rows-2 w-11/12 pb-10'>
-        <div className='w-full h-full flex flex-col gap-2 p-2 items-center border-2'>
+      <h1 className='uppercase text-3xl sm:text-3xl md:text-5xl lg:text-5xl font-bold py-4 align-center text-center'>Place Your Order</h1>
+      <form className='grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 grid-rows-2 w-11/12 pb-10'>
+        <div className='w-full h-full flex flex-col gap-2 p-2 items-center'>
           <h2 className='uppercase text-3xl font-bold py-4 align-center'>Your Cart</h2>
           <div className='w-full flex gap-2'>
             <div className='rounded-xl grid grid-rows-auto py-1 w-3/4 bg-[#47220f] shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)]'>
@@ -182,7 +179,7 @@ function Checkout() {
             </div>
           </div>
         </div>
-        <div className='w-full h-full flex flex-col gap-2 p-2 items-center border-2'>
+        <div className='w-full h-full flex flex-col gap-2 p-2 items-center'>
           <h2 className='uppercase text-3xl font-bold py-4 align-center'>Billing Information</h2>
           <input className='rounded-lg px-2 py-1 w-full' type='text' placeholder='Name' name='name' required/>
           <input className='rounded-lg px-2 py-1 w-full' type='text' placeholder='Street Address' name='street' required/>
@@ -195,7 +192,7 @@ function Checkout() {
           <input className='rounded-lg px-2 py-1 w-full' type='text' placeholder='Zip Code' name='zipCode' required/>
           <input className='rounded-lg px-2 py-1 w-full' type='text' placeholder='CVV/CVC' name='cvv' required/>
         </div>
-        <div className='flex flex-col w-full h-full border-2 items-center justify-center'>
+        <div className='flex flex-col w-full h-ful items-center justify-center order-2 sm:order-1'>
           <h2 className='uppercase text-3xl font-bold py-4 align-center'>Shipping Options</h2>
           <div className='flex flex-col gap-2 w-5/6 p-2'>
             <label for='2-day'>
@@ -214,7 +211,7 @@ function Checkout() {
             <button className='ease-in-out duration-200 rounded-lg flex justify-center align-center p-1 cursor-pointer bg-[#47220f] text-white border-2 border-[#47220f] hover:bg-[#d8ccb6] hover:text-[#47220f]' onClick={(e) => submitOrder(e)}>place order</button>
           </div>
         </div>
-        <div className='w-full h-full flex flex-col gap-2 p-2 items-center border-2'>
+        <div className='w-full h-full flex flex-col gap-2 p-2 items-center order-1 sm:order-2'>
           <h2 className='uppercase text-3xl font-bold py-4 align-center'>Shipping Information</h2>
           <input className='rounded-lg px-2 py-1 w-full' type='text' placeholder='Name' name='shipName' required/>
           <input className='rounded-lg px-2 py-1 w-full' type='text' placeholder='Street Address' name='shipStreet' required/>

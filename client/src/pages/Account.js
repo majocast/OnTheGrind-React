@@ -26,7 +26,6 @@ function Account() {
 
   const submit = async (e) => {
     e.preventDefault();
-    console.log(newUsername);
     try {
       axios.put(`http://localhost:3500/editusername/${username}`, {newUsername: newUsername})
       .then((res) => {
@@ -38,7 +37,6 @@ function Account() {
           alert('username already taken');
           document.querySelector('input[name="newname"]').value = '';
         } 
-        
         else {
           return;
         }
