@@ -1,7 +1,8 @@
-import React, {useEffect, useState} from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import { Link, useNavigate } from'react-router-dom';
 import Logo from '../images/logo.png';
+require('dotenv').config();
 
 function Register() {
   const history = useNavigate();
@@ -16,7 +17,7 @@ function Register() {
     if(password === verifyPassword) {
       try {
         //we are posting the data to the server + '/register'
-        await axios.post('http://localhost:3500/register', {
+        await axios.post(`${process.env.OTG_Server}/register`, {
           email, password, username
         })
         .then((res) => {

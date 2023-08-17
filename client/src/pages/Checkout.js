@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Logo from '../images/logo.png';
 import { Link, useNavigate } from 'react-router-dom';
+require('dotenv').config();
 
 function Checkout() {
   const history = useNavigate();
@@ -44,7 +45,7 @@ function Checkout() {
   async function pullCart() {
     try {
       const username = localStorage.getItem('username');
-      const response = await axios.get(`http://localhost:3500/pullcart/${username}`);
+      const response = await axios.get(`${process.env.OTG_Server}/pullcart/${username}`);
       setCart(response.data[0]);
     } catch (error) {
       alert('Error retrieving Cart information: ' + error.message);
@@ -62,7 +63,7 @@ function Checkout() {
   async function removeItem(e) {
     let value = e.target.value;
     try {
-      const response = await axios.delete(`http://localhost:3500/removeitem/${value}`);
+      const response = await axios.delete(`${process.env.OTG_Server}/removeitem/${value}`);
       if(response.data.status === 'item not found') {
         alert('error: item not found');
       } else {
@@ -113,7 +114,7 @@ function Checkout() {
     // Do something with the form data, like sending it to a server
     // Example using Axios:
     const username = localStorage.getItem('username');
-    axios.post(`http://localhost:3500/submitorder/${username}`, {
+    axios.post(`${process.env.OTG_Server}/submitorder/${username}`, {
       billing,
       shipping: {
         option: shippingOption,

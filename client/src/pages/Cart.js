@@ -14,6 +14,7 @@ import greenImage from '../images/products/green.jpg';
 import herbalImage from '../images/products/herbal.jpg';
 import whiteImage from '../images/products/white.jpg';
 import roseImage from '../images/products/rose.jpg';
+require('dotenv').config();
 
 function Cart() {
   const [cart, setCart] = useState([]);
@@ -22,7 +23,7 @@ function Cart() {
   async function pullCart() {
     try {
       const username = localStorage.getItem('username');
-      const response = await axios.get(`http://localhost:3500/pullcart/${username}`);
+      const response = await axios.get(`${process.env.OTG_Server}/pullcart/${username}`);
       setCart(response.data[0]);
     } catch (error) {
       alert('Error retrieving Cart information: ' + error.message);
@@ -40,7 +41,7 @@ function Cart() {
   async function removeItem(e) {
     let value = e.target.value;
     try {
-      const response = await axios.delete(`http://localhost:3500/removeitem/${value}`);
+      const response = await axios.delete(`${process.env.OTG_Server}/removeitem/${value}`);
       if(response.data.status === 'item not found') {
         alert('error: item not found');
       } else {

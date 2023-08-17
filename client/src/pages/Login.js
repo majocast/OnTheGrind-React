@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import { Link, useNavigate } from'react-router-dom';
 import Logo from '../images/logo.png';
+require('dotenv').config();
 
 function Login() {
   const history = useNavigate()
@@ -12,7 +13,7 @@ function Login() {
     e.preventDefault();
     try {
       //we are posting the data to the server + '/login'
-      await axios.post('http://localhost:3500/login', {
+      await axios.post(`${process.env.OTG_Server}/login`, {
         email, password
       })
       .then((res) => {

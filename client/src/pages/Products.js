@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Modal from '../components/Modal';
 import arabicaImage from '../images/products/arabica.jpg';
 import bourbonImage from '../images/products/bourbon.jpg';

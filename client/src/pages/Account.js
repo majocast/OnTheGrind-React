@@ -2,6 +2,7 @@ import React, {useState, useEffect} from "react";
 import axios from "axios";
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { BsPencil } from 'react-icons/bs';
+require('dotenv').config();
 
 function Account() {
   const location = useLocation();
@@ -27,7 +28,7 @@ function Account() {
   const submit = async (e) => {
     e.preventDefault();
     try {
-      axios.put(`http://localhost:3500/editusername/${username}`, {newUsername: newUsername})
+      axios.put(`${process.env.OTG_Server}/editusername/${username}`, {newUsername: newUsername})
       .then((res) => {
         if(res.data === 'username updated successfully') {
           localStorage.setItem('username', newUsername);
@@ -52,7 +53,7 @@ function Account() {
 
   const pullInfo = async () => {
     try {
-      const response = await axios.get(`http://localhost:3500/account/${username}`);
+      const response = await axios.get(`${process.env.OTG_Server}/account/${username}`);
       setEmail(response.data.email);
       setPassword(response.data.password);
     } catch (error) {
