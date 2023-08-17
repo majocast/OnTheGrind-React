@@ -77,12 +77,14 @@ const Cart = () => {
       <Link className='ease-in-out duration-200 rounded-lg flex justify-center align-center absolute top-2 left-2 p-1 cursor-pointer bg-[#47220f] text-white border-2 border-[#47220f] hover:bg-[#d8ccb6] hover:text-[#47220f]' to="/">Back to Home</Link>
       <div className='flex w-3/4 gap-10 justify-center items-center'>
         <div className='rounded-xl grid grid-rows-auto py-1 w-3/4 bg-[#47220f] shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)]'>
-          <div className='grid grid-cols-4 p-4 mx-2'>
-            <h1 className='text-white'>Item Name</h1>
-            <h1 className='text-white'>Weight Selected</h1>
-            <h1 className='text-white'>Price Per Bag (USD)</h1>
+          <div className='grid grid-cols-5 p-4 mx-2'>
+            <h1 className='text-white text-center'>Item Picture</h1>
+            <h1 className='text-white text-center'>Item Name</h1>
+            <h1 className='text-white text-center'>Weight Selected</h1>
+            <h1 className='text-white text-center'>Price Per Bag (USD)</h1>
           </div>
           {cart.map((product, index) => {
+            console.log(product.item);
             var productImg;
             switch(product.item) {
               case 'arabica':
@@ -109,28 +111,28 @@ const Cart = () => {
               case 'typica':
                 productImg = typicaImage;
                 break;
-              case 'green':
+              case 'green tea':
                 productImg = greenImage;
                 break;
-              case 'herbal':
+              case 'herbal tea':
                 productImg = herbalImage;
                 break;
-              case 'white':
+              case 'white tea':
                 productImg = whiteImage;
                 break;
-              case 'rose':
+              case 'rose tea':
                 productImg = roseImage;
                 break;
               default:
                 productImg = '';
             }
             return (
-              <div className='rounded-md bg-[#d8ccb6] grid grid-cols-5 p-4 mx-2 my-1 gap-4 align-center justify-center'>
-                <img className='w-20' src={productImg} alt='product' />
+              <div className='font-bold rounded-md bg-[#d8ccb6] grid grid-cols-5 p-4 mx-2 my-1 gap-4 align-center justify-center text-center'>
+                <img className='w-20 h-20' src={productImg} alt='product' />
                 <h1 className='flex flex-col capitalize justify-center'>{product.item}</h1>
                 <h1 className='flex flex-col justify-center'>{product.weight}</h1>
                 <h1 className='flex flex-col justify-center'>{product.price}</h1>
-                <button value={product._id} onClick={(e) => removeItem(e)}>remove</button>
+                <button className='flex flex-col justify-center items-center underline' value={product._id} onClick={(e) => removeItem(e)}>remove</button>
               </div>
             )
           })}

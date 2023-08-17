@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate, Link } from'react-router-dom';
 import { AiOutlineCloseCircle } from 'react-icons/ai';
@@ -8,6 +8,10 @@ const Modal = ({ isOpen, onClose, selectedProduct }) => {
   const [cartItem, setCartItem] = useState('');
   const [cartValue, setCartValue] = useState('');
   const [user, setUser] = useState('');
+
+  useEffect(() => {
+    setUser(localStorage.getItem('username'));
+  }, [])
 
   const getSelectedValue = (value, selectedItem) => {
     console.log(value);
@@ -19,7 +23,6 @@ const Modal = ({ isOpen, onClose, selectedProduct }) => {
   async function submit(event) {
     event.preventDefault();
     const user = localStorage.getItem('username');
-    setUser(user);
     var price = 0;
     switch (cartValue) {
       case '1lb':
@@ -68,7 +71,7 @@ const Modal = ({ isOpen, onClose, selectedProduct }) => {
           <h1 className='uppercase text-5xl font-bold py-4'>{selectedProduct.name}</h1>
           <p className='text-center'>{selectedProduct.description}</p>
           <form action='POST' className='flex gap-4 drop-shadow-lg py-2'>
-            {user ? <div>
+            {user ? <div className='flex gap-4 drop-shadow-lg py-2'>
               <select onChange={(e) => getSelectedValue(e.target.value, selectedProduct.name)} className='cursor-pointer'>
                 <option selected value='select'>Select an option!</option>
                 <option value='1lb'>$19.95 for 1lbs</option>
