@@ -1,8 +1,15 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import About from './About';
 import coffeevid from '../images/coffeevid.mp4';
 
 function Home() {
+  const location = useLocation();
+
+  useEffect(() => {
+    document.body.style.overflow = 'auto';
+  }, [location.pathname])
+
   return (
     <div className='anime-rise flex flex-col items-center justify-center w-full h-full'>
       <section className='flex justify-center bg-black w-full'>

@@ -12,7 +12,6 @@ const About = () => {
 
   useEffect(() => {
     if(location.pathname === '/about') {
-      console.log('in about');
       setReworkShow(true);
     } else {
       setReworkShow(false);
@@ -31,9 +30,9 @@ const About = () => {
     <div className='animate-rise flex flex-col items-center justify-center w-full py-10'>
       <h1 className='uppercase text-5xl font-bold py-8 text-center'>The Team Behind The Grind</h1>
       <div className='grid grid-cols-1 xs:grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 pb-8 w-3/4 '>
-        {team.map((member) => {
+        {team.map((member, index) => {
           return (
-            <div className='flex flex-col justify-center items-center'>
+            <div key={index} className='flex flex-col justify-center items-center'>
               <div className="border-4 border-[#47220f] bg-[#47220f] w-72 h-full shadow-md rounded m-3">
                 <div className="h-3/4 w-full">
                   <img className="w-full h-full object-cover rounded-t" src={member.image} alt={member.name} />

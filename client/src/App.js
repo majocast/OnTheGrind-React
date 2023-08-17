@@ -12,9 +12,9 @@ import Account from './pages/Account';
 import Checkout from './pages/Checkout';
 
 function LogLocation( { onLocationChange }) {
-  const location = useLocation("");
+  const location = useLocation('');
   useEffect(() => {
-    onLocationChange(location)
+    onLocationChange(location);
   }, [location, onLocationChange]);
   
   return null;
@@ -33,12 +33,9 @@ const routes = [
 ]
 
 function App() {
-
   const [navBar, setNavBar] = useState(true);
 
   const handleLocationChange = (newLocation) => {
-    console.log(newLocation);
-    console.log(newLocation.pathname);
     if(newLocation.pathname !== '/login' && newLocation.pathname !== '/cart' && newLocation.pathname !== '/register' && newLocation.pathname !== '/checkout' ) { 
       setNavBar(true);
     } else {

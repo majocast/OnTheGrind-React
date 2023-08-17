@@ -61,10 +61,10 @@ const Products = () => {
         <button class="ease-in-out duration-200 rounded-md p-2 bg-white" onClick={() => handleFilterSelection('tea')}>Tea</button>
       </div>
       <div className='grid grid-cols-1 xs:grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 pb-8 w-5/6'>
-        {products.map((product) => {
+        {products.map((product, index) => {
           if(product.class.includes(filter)) {
             return (
-              <div className="relative flex flex-col rounded-2xl bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700">
+              <div key={index} className="relative flex flex-col rounded-2xl bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700">
                 <img
                   className="rounded-t-2xl h-2/3"
                   src={product.image}
