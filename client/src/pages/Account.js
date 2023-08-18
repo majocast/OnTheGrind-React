@@ -2,7 +2,6 @@ import React, {useState, useEffect} from "react";
 import axios from "axios";
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { BsPencil } from 'react-icons/bs';
-require('dotenv').config();
 
 function Account() {
   const location = useLocation();

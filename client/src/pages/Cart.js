@@ -14,7 +14,6 @@ import greenImage from '../images/products/green.jpg';
 import herbalImage from '../images/products/herbal.jpg';
 import whiteImage from '../images/products/white.jpg';
 import roseImage from '../images/products/rose.jpg';
-require('dotenv').config();
 
 function Cart() {
   const [cart, setCart] = useState([]);

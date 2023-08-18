@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Logo from '../images/logo.png';
 import { Link, useNavigate } from 'react-router-dom';
-require('dotenv').config();
 
 function Checkout() {
   const history = useNavigate();
