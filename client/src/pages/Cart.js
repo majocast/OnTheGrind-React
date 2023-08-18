@@ -22,7 +22,7 @@ function Cart() {
   async function pullCart() {
     try {
       const username = localStorage.getItem('username');
-      const response = await axios.get(`${process.env.OTG_Server}/pullcart/${username}`);
+      const response = await axios.get(`${process.env.OTG_SERVER}/pullcart/${username}`);
       setCart(response.data[0]);
     } catch (error) {
       alert('Error retrieving Cart information: ' + error.message);
@@ -40,7 +40,7 @@ function Cart() {
   async function removeItem(e) {
     let value = e.target.value;
     try {
-      const response = await axios.delete(`${process.env.OTG_Server}/removeitem/${value}`);
+      const response = await axios.delete(`${process.env.OTG_SERVER}/removeitem/${value}`);
       if(response.data.status === 'item not found') {
         alert('error: item not found');
       } else {

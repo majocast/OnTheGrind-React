@@ -2,7 +2,6 @@ const express = require('express');
 const { collection, cart, Order } = require('./mongo');
 const cors = require('cors');
 const app = express();
-const nodemailer = require('nodemailer');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));

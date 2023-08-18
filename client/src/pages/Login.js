@@ -12,7 +12,7 @@ function Login() {
     e.preventDefault();
     try {
       //we are posting the data to the server + '/login'
-      await axios.post(`${process.env.OTG_Server}/login`, {
+      await axios.post(`${process.env.OTG_SERVER}/login`, {
         email, password
       })
       .then((res) => {
