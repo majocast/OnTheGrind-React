@@ -38,7 +38,7 @@ const Modal = ({ isOpen, onClose, selectedProduct }) => {
     }
     try {
       console.log(cartValue, price, cartItem, user);
-      await axios.post('http://localhost:3500/addcart', {
+      await axios.post(`${process.env.REACT_APP_OTG_SERVER}/addcart`, {
         cartValue, cartItem, user, price
       })
       .then((res) => {
