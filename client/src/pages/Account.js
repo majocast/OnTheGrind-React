@@ -27,7 +27,7 @@ function Account() {
   const submit = async (e) => {
     e.preventDefault();
     try {
-      axios.put(`${process.env.OTG_SERVER}/editusername/${username}`, {newUsername: newUsername})
+      axios.put(`${process.env.REACT_APP_OTG_SERVER}/editusername/${username}`, {newUsername: newUsername})
       .then((res) => {
         if(res.data === 'username updated successfully') {
           localStorage.setItem('username', newUsername);
@@ -52,7 +52,7 @@ function Account() {
 
   const pullInfo = async () => {
     try {
-      const response = await axios.get(`${process.env.OTG_SERVER}/account/${username}`);
+      const response = await axios.get(`${process.env.REACT_APP_OTG_SERVER}/account/${username}`);
       setEmail(response.data.email);
       setPassword(response.data.password);
     } catch (error) {
