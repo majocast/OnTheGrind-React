@@ -9,6 +9,7 @@ function Login() {
   const [password, setPassword] = useState('');
 
   async function submit(e) {
+    console.log(`${process.env.OTG_SERVER}`);
     e.preventDefault();
     try {
       //we are posting the data to the server + '/login'
