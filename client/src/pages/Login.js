@@ -9,11 +9,11 @@ function Login() {
   const [password, setPassword] = useState('');
 
   async function submit(e) {
-    console.log(`${process.env.OTG_SERVER}`);
+    console.log(`${process.env.REACT_APP_OTG_SERVER}`);
     e.preventDefault();
     try {
       //we are posting the data to the server + '/login'
-      await axios.post(`${process.env.OTG_SERVER}/login`, {
+      await axios.post(`${process.env.REACT_APP_OTG_SERVER}/login`, {
         email, password
       })
       .then((res) => {

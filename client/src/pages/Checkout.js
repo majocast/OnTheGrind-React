@@ -44,7 +44,7 @@ function Checkout() {
   async function pullCart() {
     try {
       const username = localStorage.getItem('username');
-      const response = await axios.get(`${process.env.OTG_SERVER}/pullcart/${username}`);
+      const response = await axios.get(`${process.env.REACT_APP_OTG_SERVER}/pullcart/${username}`);
       setCart(response.data[0]);
     } catch (error) {
       alert('Error retrieving Cart information: ' + error.message);
@@ -62,7 +62,7 @@ function Checkout() {
   async function removeItem(e) {
     let value = e.target.value;
     try {
-      const response = await axios.delete(`${process.env.OTG_SERVER}/removeitem/${value}`);
+      const response = await axios.delete(`${process.env.REACT_APP_OTG_SERVER}/removeitem/${value}`);
       if(response.data.status === 'item not found') {
         alert('error: item not found');
       } else {
@@ -113,7 +113,7 @@ function Checkout() {
     // Do something with the form data, like sending it to a server
     // Example using Axios:
     const username = localStorage.getItem('username');
-    axios.post(`${process.env.OTG_SERVER}/submitorder/${username}`, {
+    axios.post(`${process.env.REACT_APP_OTG_SERVER}/submitorder/${username}`, {
       billing,
       shipping: {
         option: shippingOption,

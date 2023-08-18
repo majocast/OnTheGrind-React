@@ -16,7 +16,7 @@ function Register() {
     if(password === verifyPassword) {
       try {
         //we are posting the data to the server + '/register'
-        await axios.post(`${process.env.OTG_SERVER}/register`, {
+        await axios.post(`${process.env.REACT_APP_OTG_SERVER}/register`, {
           email, password, username
         })
         .then((res) => {
