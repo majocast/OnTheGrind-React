@@ -20,22 +20,13 @@ const Modal = ({ isOpen, onClose, selectedProduct }) => {
 
   async function submit(event) {
     event.preventDefault();
-    const user = localStorage.getItem('username');
-    var price = 0;
-    switch (cartValue) {
-      case '1lb':
-        price = 19.95;
-        break;
-      case '2.5lb':
-        price = 32.95;
-        break;
-      case '5lb':
-        price = 49.99;
-        break;
-      default:
-        price = 0;
-        break;
+    let weightPrice = {
+      '1lb': 19.95,
+      '2.5lb': 32.95,
+      '5': 49.99,
     }
+    let price = weightPrice[cartValue];
+    const user = localStorage.getItem('username');
     try {
       console.log(cartValue, price, cartItem, user);
       await axios.post(`${process.env.REACT_APP_OTG_SERVER}/addcart`, {
