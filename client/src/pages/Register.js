@@ -30,7 +30,7 @@ function Register() {
           }
         })
         .catch((error) => {
-          alert('wrong details');
+          alert('ERROR: Please make sure all fields are filled.')
           console.log(error);
         });
       } catch (error) {

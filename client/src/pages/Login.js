@@ -32,7 +32,7 @@ function Login() {
         }
       })
       .catch((error) => {
-        alert('wrong details');
+        alert('ERROR');
         console.log(error);
       });
     } catch (error) {
