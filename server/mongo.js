@@ -10,7 +10,7 @@ mongoose.connect(/*process.env.MONGODB_URI ||*/'mongodb://localhost:27017/ontheg
 .then((con) => console.log(`Connected to MongoDB on HOST: ${con.connection.host}`))
 .catch((err) => console.log(err));
 
-const newSchema = new mongoose.Schema({
+const userSchema = new mongoose.Schema({
   email: {
     type: String,
     required: true
@@ -77,9 +77,9 @@ const orderSchema = new mongoose.Schema({
   }
 });
 
-const collection = mongoose.model('users', newSchema);
-const cart = mongoose.model('cart', cartSchema);
+const Users = mongoose.model('users', userSchema);
+const Cart = mongoose.model('cart', cartSchema);
 const Order = mongoose.model('order', orderSchema);
 
 //code below is necessary to access the database from any file.
-module.exports = { collection, cart, Order };
+module.exports = { Users, Cart, Order };

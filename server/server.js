@@ -1,5 +1,5 @@
 const express = require('express');
-const { collection, cart, Order } = require('./mongo');
+const { Users, Cart, Order } = require('./mongo');
 const cors = require('cors');
 const app = express();
 
@@ -14,7 +14,7 @@ app.post('/login', async(req, res) => {
 
   try {
     //searches the user in the database
-    const check = await collection.findOne({email: email});
+    const check = await Users.findOne({email: email});
     if(check) {
       //password is correct
       if(check.password === password) {
@@ -47,14 +47,14 @@ app.post('/register', async(req, res) => {
 
   try {
     //searches the user in the database
-    const check = await collection.findOne({email: email});
-    const checkUser = await collection.findOne({username: username});
+    const check = await Users.findOne({email: email});
+    const checkUser = await Users.findOne({username: username});
     if(check || checkUser) {
       res.json("exists");
     }
     else {
       res.json("does not exist");
-      await collection.insertMany([data]);
+      await Users.insertMany([data]);
     }
   } catch (error) {
       res.json("does not exist");
@@ -66,7 +66,7 @@ app.get('/account/:username', async(req, res) => {
   const username = req.params.username;
   try {
     //searches the user in the database
-    const user = await collection.findOne({username: username});
+    const user = await Users.findOne({username: username});
     if(user) {
       const userData = {
         email: user.email,
@@ -82,7 +82,7 @@ app.get('/account/:username', async(req, res) => {
   }
 })
 
-//add item to cart collection
+//add item to cart Users
 app.post('/addcart', async(req, res) => {
   const {cartValue, cartItem, user, price} = req.body;
   const data = {
@@ -92,7 +92,7 @@ app.post('/addcart', async(req, res) => {
     weight: cartValue,
   }
   try {
-      await cart.insertMany([data]);
+      await Cart.insertMany([data]);
       res.json('item successfully added to cart!');
   } catch (error) {
       console.log(error)
@@ -100,11 +100,11 @@ app.post('/addcart', async(req, res) => {
   }
 })
 
-//pull items from cart collection
+//pull items from cart Users
 app.get('/pullcart/:username', async(req, res) => {
   const username = req.params.username;
   try {
-    const items = await cart.find({username: username});
+    const items = await Cart.find({username: username});
     res.json([items]);
   } catch (error) {
     console.log(error);
@@ -112,12 +112,12 @@ app.get('/pullcart/:username', async(req, res) => {
   }
 })
 
-//remove items from cart collection
+//remove items from cart Users
 
 app.delete('/removeitem/:value', async(req, res) => {
   const itemId = req.params.value;
   try {
-    const deletedItem = await cart.findByIdAndDelete(itemId);
+    const deletedItem = await Cart.findByIdAndDelete(itemId);
     if(!deletedItem) {
       res.json('item not found');
     } else {
@@ -128,14 +128,14 @@ app.delete('/removeitem/:value', async(req, res) => {
   }
 })
 
-//adding order to order collection
+//adding order to order Users
 app.post('/submitorder/:username', async (req, res) => {
   try {
     const username = req.params.username;
     const orderData = req.body;
     const order = new Order(orderData);
     await order.save();
-    const removeAll = await cart.deleteMany({ 'username': username })
+    const removeAll = await Cart.deleteMany({ 'username': username })
     console.log(removeAll.deletedCount);
     res.json({ message: 'Order submitted successfully' });
   } catch (error) {
@@ -150,12 +150,14 @@ app.put('/editusername/:username', async (req, res) => {
   const updatedData = req.body.newUsername;
   try {
     if(updatedData !== '') {
-      const userToUpdate = await collection.findOne({username: userToEdit});
-      const cartToUpdate = await cart.find({username: userToEdit});
-      const updateExists = await collection.findOne({username: updatedData});
+      const [userToUpdate, cartToUpdate, updateExists] = await Promise.all([
+        Users.findOne({ username: userToEdit }),
+        Cart.find({ username: userToEdit }),
+        Users.findOne({ username: updatedData }),
+      ]);
       if(!updateExists) {
         if(cartToUpdate) {
-          await cart.updateMany (
+          await Cart.updateMany (
             { username: userToEdit },
             { $set: { username: updatedData }}
           );

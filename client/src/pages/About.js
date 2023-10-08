@@ -8,16 +8,6 @@ import MarcImg2 from '../images/marc-photo.jpg'
 
 function About() {
   const location = useLocation();
-  const [reworkShow, setReworkShow] = useState(true);
-
-  useEffect(() => {
-    if(location.pathname === '/about') {
-      setReworkShow(true);
-    } else {
-      setReworkShow(false);
-    }
-  }, location.pathname);
-
 
   const team = [
     {name: 'Jhon Aclan', major: 'Computer Science B.S.', college: 'SFSU 2023', city: 'Fremont, CA', image: JhonImg},
@@ -29,7 +19,7 @@ function About() {
   return (
     <div className='animate-rise flex flex-col items-center justify-center w-full py-10'>
       <h1 className='uppercase text-3xl sm:text-3xl md:text-5xl lg:text-5xl font-bold py-8 text-center'>The Team Behind The Grind</h1>
-      <div className='grid grid-cols-1 xs:grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-20 sm:gap-20 md:gap-12 lg:gap-12 pb-8 w-3/4 md:w-5/6'>
+      <div className='grid grid-cols-1 xs:grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-20 sm:gap-20 md:gap-12 lg:gap-12 pb-8 w-3/4 md:w-5/6'>
         {team.map((member, index) => {
           return (
             <div key={index} className='flex flex-col justify-center items-center'>
@@ -46,8 +36,7 @@ function About() {
             </div>
           )
         })}
-      </div>
-      {reworkShow ? 
+      </div> 
       <section className='flex flex-col justify-center items-center bg-white p-6'>
         <h1 className='uppercase text-3xl sm:text-3xl md:text-5xl lg:text-5xl font-bold py-4 text-center'>The Man Behind The Rebuild</h1>
         <div className="p-6 sm:p-12 dark:bg-gray-900 dark:text-gray-100 bg-[#d8ccb6] border-4 border-[#47220f] rounded-2xl w-5/6">
@@ -65,7 +54,7 @@ function About() {
             </div>
           </div>
         </div>
-      </section> : null}
+      </section>
     </div>
   )
 }
