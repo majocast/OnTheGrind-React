@@ -47,17 +47,19 @@ app.post('/register', async(req, res) => {
 
   try {
     //searches the user in the database
-    const check = await Users.findOne({email: email});
-    const checkUser = await Users.findOne({username: username});
+    const [check, checkUser] = await Promise.all([
+      Users.findOne({email: email}),
+      Users.findOne({username: username}),
+    ]);
+
     if(check || checkUser) {
-      res.json("exists");
-    }
-    else {
-      res.json("does not exist");
+      res.status(409).json('Username Or Email is Taken');
+    } else {
       await Users.insertMany([data]);
+      res.status(200);
     }
   } catch (error) {
-      res.json("does not exist");
+      res.status(500).json('ERROR: registration process');
   }
 })
 
@@ -100,7 +102,7 @@ app.post('/addcart', async(req, res) => {
   }
 })
 
-//pull items from cart Users
+//get items from cart for logged in user
 app.get('/pullcart/:username', async(req, res) => {
   const username = req.params.username;
   try {
@@ -167,9 +169,9 @@ app.put('/editusername/:username', async (req, res) => {
         }
         userToUpdate.username = updatedData;
         await userToUpdate.save();
-        res.json('username updated successfully');
+        res.status(200);
       } else {
-        res.json('username already taken');
+        res.status(500);
       }
     } else {
       res.json('username unchanged');

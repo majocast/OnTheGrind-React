@@ -20,17 +20,19 @@ function Register() {
           email, password, username
         })
         .then((res) => {
-          if(res.data === 'exists') {
-            alert('username or email has already registered');
+          if(res.status === 409) {
+            //duplicate error
+            alert('Username or Email is Registered');
             history('/login');
           }
-          else if(res.data === 'does not exist') {
+          else if(res.status === 200) {
+            //response.ok
             localStorage.setItem('username', username);
             history('/');
           }
         })
         .catch((error) => {
-          alert('ERROR: Please make sure all fields are filled.')
+          alert(error.message)
           console.log(error);
         });
       } catch (error) {
