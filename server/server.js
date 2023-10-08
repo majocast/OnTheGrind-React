@@ -10,7 +10,7 @@ app.use(cors());
 app.post('/login', async(req, res) => {
   //axios passes email and password from login page
   //server.js gets the email and pass from the req.body
-  const {email, password, username} = req.body;
+  const {email, password} = req.body;
 
   try {
     //searches the user in the database

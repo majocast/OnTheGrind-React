@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-import About from './About';
 import Lottie from 'lottie-react';
 import CoffeeAnimation from '../images/coffee-animation.json';
 import coffeevid from '../images/coffeevid.mp4';
@@ -19,14 +18,14 @@ function Home() {
           <source src={coffeevid} type="video/mp4" />
         </video>
       </section>
-      <section className='flex rounded-2xl shadow-innder my-4 py-4 h-full w-11/12 items-center text-center text-white'>
+      <section className='flex flex-col xs:flex-col sm:flex-col md:flex-row rounded-2xl shadow-inner my-4 p-4 h-full w-11/12 items-center text-center text-white'>
         <Lottie
-          className='w-full m-0 p-0'
+          className='m-0 p-0 order-last xs:order-last sm:order-last md:order-first w-1/5'
           animationData={CoffeeAnimation}
           loop
           autoplay
         />
-        <div className='rounded-2xl text-[#47220f] text-start'>
+        <div className='rounded-2xl text-[#47220f] text-start w-4/5'>
           <h1 className='uppercase text-3xl sm:text-3xl md:text-5xl lg:text-5xl font-bold'>Welcome {localStorage.getItem('username') ? localStorage.getItem('username') : null}</h1>
           <p className='text-lg sm:text-lg md:text-xl lg:text-xl py-2'>We offer a variety of high quality coffee beans 
             and tea leaves from different parts of the world. Even the highest grade 
