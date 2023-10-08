@@ -7,7 +7,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 
-app.post('/login', async(req, res) => {
+//ROUTES
+app.get('/login', async(req, res) => {
   //axios passes email and password from login page
   //server.js gets the email and pass from the req.body
   const {email, password} = req.body;

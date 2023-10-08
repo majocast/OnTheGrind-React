@@ -12,8 +12,8 @@ function Login() {
     console.log(`${process.env.REACT_APP_OTG_SERVER}`);
     e.preventDefault();
     try {
-      //we are posting the data to the server + '/login'
-      await axios.post(`${process.env.REACT_APP_OTG_SERVER}/login`, {
+      //we are getting the data to the server + '/login'
+      await axios.get(`${process.env.REACT_APP_OTG_SERVER}/login`, {
         email, password
       })
       .then((res) => {
