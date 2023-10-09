@@ -32,26 +32,19 @@ app.post('/register', async(req, res) => {
 
   try {
     //searches the user in the database
-    console.log('before promise.all')
     const [check, checkUser] = await Promise.all([
       Users.findOne({email: email}),
       Users.findOne({username: username}),
     ]);
 
-    console.log('after promise.all')
     if(check || checkUser) {
       res.status(409).json('Username Or Email is Taken');
     } else {
-      console.log('in else')
-      console.log(key)
       const cipher = crypto.createCipheriv(algorithm, key, initVector);
       let encryptedData = cipher.update(data.password, 'utf-8', 'hex');
       encryptedData += cipher.final('hex');
-      console.log('after encryption')
 
       const base64data = Buffer.from(initVector, 'binary').toString('base64');
-
-      console.log('after base64')
 
       data.password = encryptedData;
       data.initVector = base64data;
@@ -64,22 +57,29 @@ app.post('/register', async(req, res) => {
   }
 })
 
-app.get('/login', async(req, res) => {
+app.get('/login/:email/:password', async(req, res) => {
   //axios passes email and password from login page
   //server.js gets the email and pass from the req.body
-  const {email, password} = req.body;
+  const {email, password} = req.params;
+  console.log(email)
 
   try {
     //searches the user in the database
     const check = await Users.findOne({email: email});
+    
+    const encryptedData = Buffer.from(check.initVector, 'base64');
+    const decipher = crypto.createDecipheriv(algorithm, key, encryptedData);
+    let decryptedData = decipher.update(check.password, 'hex', 'utf-8');
+    decryptedData += decipher.final('utf-8');
+    
     if(check) {
       //password is correct
-      if(check.password === password) {
+      if(decryptedData === password) {
         res.json({status: 200, username: check.username});
       }
       //password is incorrect
       else {
-        res.status(401);
+        res.status(401).json('incorrect password');
       }
       
     }
@@ -87,7 +87,7 @@ app.get('/login', async(req, res) => {
       res.json("does not exist");
     }
   } catch (error) {
-      res.json("does not exist");
+      res.json("ERROR: " + error);
   }
 })
 

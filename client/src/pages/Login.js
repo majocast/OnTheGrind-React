@@ -12,10 +12,10 @@ function Login() {
     console.log(`${process.env.REACT_APP_OTG_SERVER}`);
     e.preventDefault();
     try {
+      console.log(email);
+      console.log(password);
       //we are getting the data to the server + '/login'
-      await axios.get(`${process.env.REACT_APP_OTG_SERVER}/login`, {
-        email, password
-      })
+      await axios.get(`${process.env.REACT_APP_OTG_SERVER}/login/${email}/${password}`)
       .then((res) => {
         if(res.data.status === 200) {
           localStorage.setItem('username', res.data.username);
