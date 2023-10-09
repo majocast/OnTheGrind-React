@@ -2,12 +2,68 @@ const express = require('express');
 const { Users, Cart, Order } = require('./mongo');
 const cors = require('cors');
 const app = express();
+const crypto = require('crypto');
+
+//encryption algorithm
+const algorithm = 'aes-256-cbc';
+
+//private key
+const key = 'adnan-tech-programming-computers';
+
+const initVector = crypto.randomBytes(16);
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 
 //ROUTES
+
+//registration code
+app.post('/register', async(req, res) => {
+  //axios passes email and password from login page
+  //server.js gets the email and pass from the req.body
+  console.log('in register');
+  const {email, password, username} = req.body;
+  const data = {
+    username: username,
+    email: email,
+    password: password
+  }
+
+  try {
+    //searches the user in the database
+    console.log('before promise.all')
+    const [check, checkUser] = await Promise.all([
+      Users.findOne({email: email}),
+      Users.findOne({username: username}),
+    ]);
+
+    console.log('after promise.all')
+    if(check || checkUser) {
+      res.status(409).json('Username Or Email is Taken');
+    } else {
+      console.log('in else')
+      console.log(key)
+      const cipher = crypto.createCipheriv(algorithm, key, initVector);
+      let encryptedData = cipher.update(data.password, 'utf-8', 'hex');
+      encryptedData += cipher.final('hex');
+      console.log('after encryption')
+
+      const base64data = Buffer.from(initVector, 'binary').toString('base64');
+
+      console.log('after base64')
+
+      data.password = encryptedData;
+      data.initVector = base64data;
+      await Users.insertMany([data]);
+      res.status(200).json('success');
+    }
+  } catch (error) {
+      console.log(error.message);
+      res.status(500).json('ERROR: registration process');
+  }
+})
+
 app.get('/login', async(req, res) => {
   //axios passes email and password from login page
   //server.js gets the email and pass from the req.body
@@ -19,11 +75,11 @@ app.get('/login', async(req, res) => {
     if(check) {
       //password is correct
       if(check.password === password) {
-        res.json({status: "exists", username: check.username});
+        res.json({status: 200, username: check.username});
       }
       //password is incorrect
       else {
-        res.json("mismatch");
+        res.status(401);
       }
       
     }
@@ -32,35 +88,6 @@ app.get('/login', async(req, res) => {
     }
   } catch (error) {
       res.json("does not exist");
-  }
-})
-
-//registration code
-app.post('/register', async(req, res) => {
-  //axios passes email and password from login page
-  //server.js gets the email and pass from the req.body
-  const {email, password, username} = req.body;
-  const data = {
-    username: username,
-    email: email,
-    password: password
-  }
-
-  try {
-    //searches the user in the database
-    const [check, checkUser] = await Promise.all([
-      Users.findOne({email: email}),
-      Users.findOne({username: username}),
-    ]);
-
-    if(check || checkUser) {
-      res.status(409).json('Username Or Email is Taken');
-    } else {
-      await Users.insertMany([data]);
-      res.status(200);
-    }
-  } catch (error) {
-      res.status(500).json('ERROR: registration process');
   }
 })
 
@@ -182,7 +209,7 @@ app.put('/editusername/:username', async (req, res) => {
   }
 })
 
-let PORT = process.env.PORT || 3500; 
+let PORT = /*process.env.PORT ||*/ 3500; 
 
 app.listen(PORT, () => {
     console.log(`App listening on port ${PORT}!`);
