@@ -12,7 +12,6 @@ function Register() {
 
   async function submit(e) {
     e.preventDefault();
-    console.log(email, password, username);
     if(password === verifyPassword) {
       try {
         //we are posting the data to the server + '/register'
