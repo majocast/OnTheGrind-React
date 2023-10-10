@@ -3,12 +3,13 @@ const { Users, Cart, Order } = require('./mongo');
 const cors = require('cors');
 const app = express();
 const crypto = require('crypto');
+require('dotenv').config();
 
 //encryption algorithm
 const algorithm = 'aes-256-cbc';
 
 //private key
-const key = 'adnan-tech-programming-computers';
+const key = `${process.env.ENCRYPTKEY}`;
 
 const initVector = crypto.randomBytes(16);
 
@@ -209,7 +210,7 @@ app.put('/editusername/:username', async (req, res) => {
   }
 })
 
-let PORT = /*process.env.PORT ||*/ 3500; 
+let PORT = process.env.PORT || 3500; 
 
 app.listen(PORT, () => {
     console.log(`App listening on port ${PORT}!`);

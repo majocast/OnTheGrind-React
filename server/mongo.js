@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 require('dotenv').config();
 
 //connection to mongoDB database, move to env file later
-mongoose.connect(/*process.env.MONGODB_URI ||*/'mongodb://localhost:27017/onthegrind', {
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/onthegrind', {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     family: 4,
