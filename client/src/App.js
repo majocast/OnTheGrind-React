@@ -34,7 +34,6 @@ const routes = [
 
 function App() {
   const [navBar, setNavBar] = useState(true);
-  console.log(process.env.REACT_APP_OTG_SERVER);
 
   const handleLocationChange = (newLocation) => {
     if(newLocation.pathname !== '/login' && newLocation.pathname !== '/cart' && newLocation.pathname !== '/register' && newLocation.pathname !== '/checkout' ) { 
