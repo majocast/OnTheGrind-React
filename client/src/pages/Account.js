@@ -50,7 +50,8 @@ function Account() {
     setUsername(localStorage.getItem('username'));
   }, [edit]);
 
-  const pullInfo = async () => {
+  //self invoking pull info function
+  (async function() {
     try {
       await axios.get(`${process.env.REACT_APP_OTG_SERVER}/account/${username}`)
       .then((response) => {
@@ -63,8 +64,7 @@ function Account() {
     } catch (error) {
       console.error("error fetching data: ", error);
     }
-  }
-  pullInfo();
+  })();
 
   const signOut = () => {
     localStorage.clear();
