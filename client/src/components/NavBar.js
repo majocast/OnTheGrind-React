@@ -9,6 +9,11 @@ const NavBar = () => {
   const location = useLocation();
   const [username, setUser] = useState(false);
 
+  const handleDropdown = () => {
+    const Dropdown = document.getElementById('mobileDropdown');
+    Dropdown.classList.toggle('hidden');
+  }
+
   useEffect(() => {
     if(localStorage.getItem('username')) {
       setUser(true);
@@ -30,21 +35,18 @@ const NavBar = () => {
         <div className='relative md:hidden'>
           <button
             className='ease-in-out duration-200 hover:text-[#d8ccb6]'
-            onClick={() => {
-              const dropdown = document.getElementById('mobileDropdown');
-              dropdown.classList.toggle('hidden');
-            }}
+            onClick={handleDropdown}
           >
-            <RxDropdownMenu size={40} color='white'/> {/* Add your preferred menu icon here */}
+            <RxDropdownMenu size={40} color='white'/>
           </button>
           <ul
             id='mobileDropdown'
             className='dropdown-content hidden md:block absolute top-10 mt-2 w-screen bg-white text-[#47220f]'
           >
-            <li><Link className='ease-in-out duration-200 hover:text-[#d8ccb6]' to='/'>Home</Link></li>
-            <li><Link className='ease-in-out duration-200 hover:text-[#d8ccb6]' to='/products'>Products</Link></li>
-            <li><Link className='ease-in-out duration-200 hover:text-[#d8ccb6]' to='/faq'>FAQ</Link></li>
-            <li><Link className='ease-in-out duration-200 hover:text-[#d8ccb6]' to='/about'>The Team</Link></li>
+            <li><Link className='ease-in-out duration-200 hover:text-[#d8ccb6]' onClick={handleDropdown} to='/'>Home</Link></li>
+            <li><Link className='ease-in-out duration-200 hover:text-[#d8ccb6]' onClick={handleDropdown} to='/products'>Products</Link></li>
+            <li><Link className='ease-in-out duration-200 hover:text-[#d8ccb6]' onClick={handleDropdown} to='/faq'>FAQ</Link></li>
+            <li><Link className='ease-in-out duration-200 hover:text-[#d8ccb6]' onClick={handleDropdown} to='/about'>The Team</Link></li>
           </ul>
         </div>
         <ul className='flex space-x-6 mr-2 justify-evenly w-100 items-center'>

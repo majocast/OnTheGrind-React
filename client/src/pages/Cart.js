@@ -22,8 +22,10 @@ function Cart() {
   async function pullCart() {
     try {
       const username = localStorage.getItem('username');
-      const response = await axios.get(`${process.env.REACT_APP_OTG_SERVER}/pullcart/${username}`);
-      setCart(response.data[0]);
+      if(username) {
+        const response = await axios.get(`${process.env.REACT_APP_OTG_SERVER}/pullcart/${username}`);
+        setCart(response.data[0]);
+      }
     } catch (error) {
       alert('Error retrieving Cart information: ' + error.message);
     }

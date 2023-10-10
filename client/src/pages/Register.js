@@ -12,7 +12,6 @@ function Register() {
 
   async function submit(e) {
     e.preventDefault();
-    console.log(email, password, username);
     if(password === verifyPassword) {
       try {
         //we are posting the data to the server + '/register'
@@ -20,17 +19,20 @@ function Register() {
           email, password, username
         })
         .then((res) => {
-          if(res.data === 'exists') {
-            alert('username or email has already registered');
+          if(res.status === 409) {
+            //duplicate error
+            alert('Username or Email is Registered');
             history('/login');
           }
-          else if(res.data === 'does not exist') {
+          else if(res.status === 200) {
+            //response.ok
+            console.log('response okay')
             localStorage.setItem('username', username);
             history('/');
           }
         })
         .catch((error) => {
-          alert('wrong details');
+          alert(error.message)
           console.log(error);
         });
       } catch (error) {
@@ -47,7 +49,7 @@ function Register() {
       <img src={Logo} alt='logo' className='w-96'/>
       <div className='rounded-2xl border-4 border-[#47220f] flex flex-col items-center justify-center bg-white p-8 my-4 drop-shadow-lg'>
         <h1 className='text-3xl font-bold py-2'>Register</h1>
-        <form action='POST' className='flex flex-col gap-4 drop-shadow-lg py-2'>
+        <form action='POST' className='flex flex-col gap-4 drop-shadow-lg py-2 animate-rise'>
           <input className='rounded-lg px-2 py-1' type='text' onChange={(e) => { setUsername(e.target.value) }} placeholder='Username' required/>
           <input className='rounded-lg px-2 py-1' type='email' onChange={(e) => { setEmail(e.target.value) }} placeholder='Email' required/>
           <input className='rounded-lg px-2 py-1' type='password' onChange={(e) => { setPassword(e.target.value) }} placeholder='Password' required/>

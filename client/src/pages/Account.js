@@ -27,13 +27,13 @@ function Account() {
   const submit = async (e) => {
     e.preventDefault();
     try {
-      axios.put(`${process.env.REACT_APP_OTG_SERVER}/editusername/${username}`, {newUsername: newUsername})
+      await axios.put(`${process.env.REACT_APP_OTG_SERVER}/editusername/${username}`, {newUsername: newUsername})
       .then((res) => {
-        if(res.data === 'username updated successfully') {
+        console.log(res.status);
+        if(res.status === 200) {
           localStorage.setItem('username', newUsername);
-          alert('username updated successfully');
           toggleEdit();
-        } else if(res.data === 'username already taken') {
+        } else if(res.status === 500) {
           alert('username already taken');
           document.querySelector('input[name="newname"]').value = '';
         } 
@@ -50,16 +50,21 @@ function Account() {
     setUsername(localStorage.getItem('username'));
   }, [edit]);
 
-  const pullInfo = async () => {
+  //self invoking pull info function
+  (async function() {
     try {
-      const response = await axios.get(`${process.env.REACT_APP_OTG_SERVER}/account/${username}`);
-      setEmail(response.data.email);
-      setPassword(response.data.password);
+      await axios.get(`${process.env.REACT_APP_OTG_SERVER}/account/${username}`)
+      .then((response) => {
+        setEmail(response.data.email);
+        setPassword(response.data.password);
+      })
+      .catch((err) => {
+        console.log(err.message);
+      })
     } catch (error) {
       console.error("error fetching data: ", error);
     }
-  }
-  pullInfo();
+  })();
 
   const signOut = () => {
     localStorage.clear();
