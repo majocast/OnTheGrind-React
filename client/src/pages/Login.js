@@ -45,7 +45,7 @@ function Login() {
       <img src={Logo} alt='logo' className='w-96'/>
       <div className='rounded-2xl border-4 border-[#47220f] flex flex-col items-center justify-center bg-white p-8 my-4 drop-shadow-lg animate-rise'>
         <h1 className='text-3xl font-bold py-2'>Login</h1>
-        <form action='POST' className='flex flex-col gap-4 drop-shadow-lg py-2'>
+        <form action='GET' className='flex flex-col gap-4 drop-shadow-lg py-2'>
           <input className='rounded-lg px-2 py-1' type='email' onChange={(e) => { setEmail(e.target.value) }} name='' id='' placeholder='Email'/>
           <input className='rounded-lg px-2 py-1' type='password' onChange={(e) => { setPassword(e.target.value) }} name='' id='' placeholder='Password'/>
           <button className='h-auto rounded-lg py-1 cursor-pointer bg-[#47220f] text-white hover:bg-[#d8ccb6] hover:text-[#47220f]' type='submit' onClick={submit}>Log In</button>
